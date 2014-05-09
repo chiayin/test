@@ -1,0 +1,113 @@
+<head>
+
+	
+	<title>jQuery treeview</title>
+	
+	<link rel="stylesheet" href="../jquery.treeview.css" />
+    <link rel="stylesheet" href="../red-treeview.css" />
+	<link rel="stylesheet" href="screen.css" />
+	<link rel="stylesheet" href="bootstrap.css" />
+	<link rel="stylesheet" href="docs.css" />
+	
+	<script src="../lib/jquery.js" type="text/javascript"></script>
+	<script src="../lib/jquery.cookie.js" type="text/javascript"></script>
+	<script src="../jquery.treeview.js" type="text/javascript"></script>
+	<script src="../jquery.treeview.edit.js" type="text/javascript"></script>
+	<script src="../jquery.treeview.async.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	
+	/*$("#something").treeview({  
+                collapsed: false, //是否預先打開  
+                animated: "fast", //動畫使用  
+                control:"#sidetreecontrol", //將 打開/折合事件綁定至該 div  
+                persist: "cookie",  
+                cookieId: "navigationtree",  
+                prerendered:false, //預先載入同 Layer 內容  
+                unique:true //打開某選項，關閉其他選項  
+            }); */ 
+	
+	
+	
+	
+	function validatNonEmpty(inputField,somethingtext,num){
+	
+	var warning= "Please enter a value.";
+		if(inputField.value.length == 0){
+			somethingtext.innerHTML = "<p  style='position: absolute; top=10;'>"+warning+"</p>";
+		}
+		else {
+				var abc = document.getElementById("something").value;
+				if(num==1){
+					var branches = $("<li><span class='folder'>"+abc+"</span><ul>"+ 
+						"<span id='layer1'/span>").appendTo("#tree");
+	
+						$("#tree").treeview({
+						submit: branches
+						});
+				}	
+				else if(num ==2){
+					branches = $("<li><span class='folder'>"+abc+"</span><ul>"+ 
+					"<span id='layer2'/span>").appendTo("#layer1");
+				$("#tree").treeview({
+					submit: branches
+				});
+				}
+				else if(num ==3){	
+					branches = $("<li ><span class='folder'>"+abc+"</span><ul>"+ 
+					"<span id='layer3'/span>").appendTo("#layer2");
+				$("#tree").treeview({
+					submit: branches
+				});
+				}
+				
+				else if(num ==4){	
+					branches =$("<li ><span class='file'>"+abc+"</span><ul>"+ 
+					"<span id='layer4'/span>").appendTo("#layer3");
+				
+				}
+			
+			
+				
+			
+			
+		}
+	}		
+	
+	</script>
+	</head>
+	<body>
+	
+	<h1 id="banner">Demo</h1>
+	<div id="main">
+	
+	
+	<form class="navbar-form pull-left filetree treeview-famfamfam" >
+		
+		<input id="something" name="something" type="text" class="span2" checked="checked" />
+		<span id="somethng_text" style='color:red' ></span>	
+		
+		<!--<select name = "layer">
+			<option value =1>layer1</option>
+			<option value =2>layer2</option>
+			<option value =3>layer3</option>
+			
+		</select>-->
+		
+		<input type="button" id="submit"  class="btn btn-primary" value="submit" checked="checked" type="default" onclick="validatNonEmpty(document.getElementById('something'),document.getElementById('somethng_text'),1);"/>
+		<input type="button" id="submit2"  class="btn btn-primary" value="submit2" checked="checked" type="default" onclick="validatNonEmpty(document.getElementById('something'),document.getElementById('somethng_text'),2);"/>
+		<input type="button" id="submit3"  class="btn btn-primary" value="submit3" checked="checked" type="default" onclick="validatNonEmpty(document.getElementById('something'),document.getElementById('somethng_text'),3);"/>
+		<input type="button" id="submit3"  class="btn btn-primary" value="submit3" checked="checked" type="default" onclick="validatNonEmpty(document.getElementById('something'),document.getElementById('somethng_text'),4);"/>
+		
+		
+		<button id="refresh">Refresh both Trees</button>
+
+		
+	</form>
+		<br/><br/><br/>
+	<div class="pull-left filetree treeview-famfamfam" id="tree">
+	</div>
+	
+</div>
+ 
+</body></html>
